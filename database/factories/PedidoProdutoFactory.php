@@ -19,7 +19,7 @@ class PedidoProdutoFactory extends Factory
         return [
             'id_pedido' => fake()->numberBetween(1,50),
             'id_user' => fake()->numberBetween(1,10),
-            'produto_tamanho' => '1',
+            'id_produto_tamanho' => '1',
             'preco' => fake()->numberBetween(50,199),
             'qtd' => fake()->numberBetween(1,15),
             'subtotal' => fake()->numberBetween(50,3000),
