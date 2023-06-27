@@ -1,9 +1,18 @@
 <?php
+/*
+* |----------------------------------------
+* |  Felipe Correia  27-06-2023
+* |----------------------------------------
+*/
 
 namespace App\Http\Controllers;
 
-use App\Models\Cargo;
 use Illuminate\Http\Request;
+use App\Models\{
+    Cargo,
+    User
+};
+use Ramsey\Uuid\Type\Integer;
 
 class CargoController extends Controller
 {
@@ -12,7 +21,9 @@ class CargoController extends Controller
      */
     public function index()
     {
-        //
+        $cargos = Cargo::OrderBy('cargo');
+        return view('cargo.index')
+            ->with(compact('cargos'));
     }
 
     /**
@@ -20,7 +31,9 @@ class CargoController extends Controller
      */
     public function create()
     {
-        //
+        $cargo = null;
+        return view('cargo.form')
+            ->with(compact('cargo'));
     }
 
     /**
@@ -28,38 +41,52 @@ class CargoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cargo = Cargo::create($request->all());
+        return redirect()
+            ->route('cargo.index')
+            ->with('success', 'Cadastrado com Sucesso!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Cargo $cargo)
+    public function show(Integer $id)
     {
-        //
+        $cargo = Cargo::find($id);
+        return view('cargo.show')
+            ->with(compact('cargo'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cargo $cargo)
+    public function edit(Integer $id)
     {
-        //
+        $cargo = Cargo::find($id);
+        return view('cargo.form')
+            ->with(compact('cargo'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cargo $cargo)
+    public function update(Request $request, Integer $id)
     {
-        //
+        $cargo = Cargo::find($id);
+        $cargo->update($request->all());
+        return redirect()
+            ->route('cargo.index')
+            ->with('success', 'Atualizado com Sucesso!')
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cargo $cargo)
+    public function destroy(Integer $id)
     {
-        //
+        $cargo = Cargo::find($id)->delete();
+        return redirect()
+            ->back()
+            ->with('danger', 'Excluido com Sucesso!');
     }
 }

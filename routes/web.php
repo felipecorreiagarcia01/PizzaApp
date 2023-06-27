@@ -70,8 +70,8 @@ Route::prefix('cargos')
 *--------------------------------
 */
 Route::prefix('clientes')
-->controller(ClienteController::class)
-->group(function () {
+    ->controller(ClienteController::class)
+    ->group(function () {
     Route::get('/', 'index')
         ->name('cliente.index');
     Route::get('/novo', 'create')
@@ -94,8 +94,8 @@ Route::prefix('clientes')
 *--------------------------------
 */
 Route::prefix('enderecos')
-->controller(EnderecoController::class)
-->group(function () {
+    ->controller(EnderecoController::class)
+    ->group(function () {
     Route::get('/', 'index')
         ->name('endereco.index');
     Route::get('/novo', 'create')
@@ -118,8 +118,8 @@ Route::prefix('enderecos')
 *--------------------------------
 */
 Route::prefix('pedidos')
-->controller(PedidoController::class)
-->group(function () {
+    ->controller(PedidoController::class)
+    ->group(function () {
     Route::get('/', 'index')
         ->name('pedido.index');
     Route::get('/novo', 'create')
@@ -142,8 +142,8 @@ Route::prefix('pedidos')
 *--------------------------------
 */
 Route::prefix('produtos')
-->controller(ProdutoController::class)
-->group(function () {
+    ->controller(ProdutoController::class)
+    ->group(function () {
     Route::get('/', 'index')
         ->name('produto.index');
     Route::get('/novo', 'create')
@@ -166,8 +166,8 @@ Route::prefix('produtos')
 *--------------------------------
 */
 Route::prefix('tamanhos')
-->controller(ProdutoTamanhoControllerController::class)
-->group(function () {
+    ->controller(ProdutoTamanhoControllerController::class)
+    ->group(function () {
     Route::get('/', 'index')
         ->name('tamanho.index');
     Route::get('/novo', 'create')
