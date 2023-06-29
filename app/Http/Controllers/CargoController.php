@@ -21,7 +21,8 @@ class CargoController extends Controller
      */
     public function index()
     {
-        $cargos = Cargo::OrderBy('cargo');
+        $cargos = Cargo::OrderBy('cargo')
+                        ->get();
         return view('cargo.index')
             ->with(compact('cargos'));
     }
@@ -50,7 +51,7 @@ class CargoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Integer $id)
+    public function show(int $id)
     {
         $cargo = Cargo::find($id);
         return view('cargo.show')
@@ -60,7 +61,7 @@ class CargoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Integer $id)
+    public function edit(int $id)
     {
         $cargo = Cargo::find($id);
         return view('cargo.form')
@@ -70,23 +71,23 @@ class CargoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Integer $id)
+    public function update(Request $request, int $id)
     {
         $cargo = Cargo::find($id);
         $cargo->update($request->all());
         return redirect()
             ->route('cargo.index')
-            ->with('success', 'Atualizado com Sucesso!')
+            ->with('success', 'Atualizado com Sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Integer $id)
+    public function destroy(int $id)
     {
         $cargo = Cargo::find($id)->delete();
         return redirect()
             ->back()
-            ->with('danger', 'Excluido com Sucesso!');
+            ->with('destroy', 'Excluido com Sucesso!');
     }
 }

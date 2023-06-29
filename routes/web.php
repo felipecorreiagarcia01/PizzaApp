@@ -60,7 +60,7 @@ Route::prefix('cargos')
             ->name('cargo.store');
         Route::post('/update', 'update')
             ->name('cargo.update');
-        Route::post('/destroy', 'destroy')
+        Route::post('/destroy/{id}', 'destroy')
             ->name('cargo.destroy');
     });
 
