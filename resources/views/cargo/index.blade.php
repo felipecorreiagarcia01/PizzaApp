@@ -18,15 +18,12 @@
             <td>
                 <a class="btn btn-primary" href="{{ route('cargo.edit', ['id'=>$cargo->id_cargo]) }}">
                 <i class="bi bi-pencil-square"></i>
-                    Editar
                 </a>
                 <a class="btn btn-warning" href="{{ route('cargo.show', ['id'=>$cargo->id_cargo]) }}">
                     <i class="bi bi-eye-fill"></i>
-                    Ver
                 </a>
                 <a class="btn btn-danger" href="{{ route('cargo.destroy', ['id'=>$cargo->id_cargo]) }}">
                     <i class="bi bi-trash3-fill"></i>
-                    Excluir
                 </a>
             </td>
             <td>{{ $cargo->id_cargo }}</td>

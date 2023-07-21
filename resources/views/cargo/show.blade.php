@@ -15,15 +15,10 @@
             <td>
             <a class="btn btn-primary" href="#">
             <i class="bi bi-pencil-square"></i>
-                Editar
             </a>
-                <a class="btn btn-warning" href="#">
-            <i class="bi bi-eye-fill"></i>
-                Ver
-                </a>
             </td>
             <td>
-                ---
+                {{ $cargo->cargo}}
             </td>
         </tr>
     </tbody>

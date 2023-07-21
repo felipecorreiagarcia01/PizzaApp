@@ -21,15 +21,12 @@
             <td>
                 <a class="btn btn-primary" href="{{ route('produto.edit', ['id'=>$produto->id_produto]) }}">
                 <i class="bi bi-pencil-square"></i>
-                    Editar
                 </a>
                 <a class="btn btn-warning" href="{{ route('produto.show', ['id'=>$produto->id_produto]) }}">
                     <i class="bi bi-eye-fill"></i>
-                    Ver
                 </a>
                 <a class="btn btn-danger" href="{{ route('produto.destroy', ['id'=>$produto->id_produto]) }}">
                     <i class="bi bi-trash3-fill"></i>
-                    Excluir
                 </a>
             </td>
             <td>{{ $produto->id_produto }}</td>
