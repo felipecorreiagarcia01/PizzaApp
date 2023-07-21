@@ -100,7 +100,7 @@ class ProdutoController extends Controller
     {
         $produtoTamanho = null;
         $produto = Produto::find($id_produto);
-        $tamanhos = ProdutoTamanho::class;
+        $tamanhos = Tamanho::class;
 
         return view('produto.formTamanho')
             ->with(compact('produto', 'tamanhos', 'produtoTamanho'));
@@ -108,7 +108,7 @@ class ProdutoController extends Controller
 
     public function storeTamanho(Request $request, int $id_produto)
     {
-        $produtoTamanho = ProdutoTamanho::create()([
+        $produtoTamanho = ProdutoTamanho::create([
             'id_produto' => $id_produto,
             'id_tamanho' => $request->id_tamanho,
             'preco'      => $request->preco,
