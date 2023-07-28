@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Models\{
+    ClienteEndereco
+};
+
+
 class Cliente extends Model
 {
     use HasFactory, SoftDeletes;
@@ -33,9 +38,12 @@ class Cliente extends Model
      * ----------------------------------------------------------------
      */
 
-    //  public function usuarios(): object {
-    //     return $this->belongsTo(User::class,
-    //                             'id_cargo',
-    //                             'id_cargo');
-    //  }
+     public function clienteendereco(): object {
+        return $this->belongsTo(
+            ClienteEndereco::class,
+            'id_cliente_endereco',
+            'id_cliente_endereco'
+        );
+     }
+
 }

@@ -93,24 +93,24 @@ Route::prefix('clientes')
 *           |Endereços|
 *--------------------------------
 */
-Route::prefix('enderecos')
-    ->controller(EnderecoController::class)
-    ->group(function () {
-    Route::get('/', 'index')
-        ->name('endereco.index');
-    Route::get('/novo', 'create')
-        ->name('endereco.create');
-    Route::get('/{id}', 'show')
-        ->name('endereco.show');
-    Route::get('/editar/{id}', 'edit')
-        ->name('endereco.edit');
-    Route::post('/store', 'store')
-        ->name('endereco.store');
-    Route::post('/update', 'update')
-        ->name('endereco.update');
-    Route::post('/destroy', 'destroy')
-        ->name('endereco.destroy');
-});
+// Route::prefix('enderecos')
+//     ->controller(EnderecoController::class)
+//     ->group(function () {
+//     Route::get('/', 'index')
+//         ->name('endereco.index');
+//     Route::get('/novo', 'create')
+//         ->name('endereco.create');
+//     Route::get('/{id}', 'show')
+//         ->name('endereco.show');
+//     Route::get('/editar/{id}', 'edit')
+//         ->name('endereco.edit');
+//     Route::post('/store', 'store')
+//         ->name('endereco.store');
+//     Route::post('/update', 'update')
+//         ->name('endereco.update');
+//     Route::post('/destroy', 'destroy')
+//         ->name('endereco.destroy');
+// });
 
 /*
 *--------------------------------
@@ -197,7 +197,6 @@ Route::prefix('tamanhos')
     Route::post('/destroy', 'destroy')
         ->name('tamanho.destroy');
 });
-
 
 
 
