@@ -41,8 +41,8 @@ class Cliente extends Model
      public function clienteendereco(): object {
         return $this->belongsTo(
             ClienteEndereco::class,
-            'id_cliente_endereco',
-            'id_cliente_endereco'
+            'id_cliente',
+            'id_cliente'
         );
      }
 

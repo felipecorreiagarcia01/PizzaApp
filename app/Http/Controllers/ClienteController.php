@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\{
     Cliente,
     Endereco,
-    ClienteEndereco
+    ClienteEndereco,
 };
-
-
-
 
 class ClienteController extends Controller
 {
@@ -20,8 +18,7 @@ class ClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::orderBy('nome');
-        return view('cliente.index')
-            ->with(compact('clientes'));
+        return view('cliente.index')->with(compact('clientes'));
     }
 
     /**
@@ -30,21 +27,19 @@ class ClienteController extends Controller
     public function create()
     {
         $cliente = null;
-        return view('cliente.form')
-            ->with(compact(
-                'cliente'
-            ));
+        return view('cliente.form')->with(compact('cliente'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
         $cliente = Cliente::create($request->all());
         return redirect()
-            ->route('cliente.show', ['id' => $cliente->id_cliente])
-            ->with('success', 'Cadastrado com sucesso.');
+            ->route('cliente.show',['id' => $cliente->id_cliente])
+            ->with('success', 'Cadastrado com Sucesso!');
     }
 
     /**
@@ -53,11 +48,11 @@ class ClienteController extends Controller
     public function show(int $id)
     {
         $cliente = Cliente::find($id);
-
+        $enderecos = Endereco::class;
 
         return view('cliente.show')
             ->with(compact(
-                'cliente'
+                'cliente',
             ));
     }
 
@@ -70,8 +65,7 @@ class ClienteController extends Controller
 
         return view('cliente.form')
             ->with(compact(
-                'cliente'
-            ));
+                'cliente'));
     }
 
     /**
@@ -82,90 +76,87 @@ class ClienteController extends Controller
         $cliente = Cliente::find($id);
         $cliente->update($request->all());
         return redirect()
-            ->route('cliente.show', ['id' => $cliente->id_cliente])
-            ->with('success', 'Atualizado com sucesso!');
+            ->route('cliente.show',['id' => $cliente->id_cliente])
+            ->with('success','Atualizado com Sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id )
+    public function destroy(int $id)
     {
         Cliente::find($id)->delete();
         return redirect()
             ->back()
-            ->with('danger', 'Removido com sucesso!');
+            ->with('danger', 'Excluído com Sucesso!');
     }
 
-    public function destroyendereco(int $id )
+
+
+
+    /*
+    *|----------------------------------|*
+    *|         CLIENTES ENDERECOS       |*
+    *|----------------------------------|*
+    */
+
+
+    public function indexEndereco(int $id_cliente)
     {
-        Cliente::find($id)->delete();
+        $enderecos = Endereco::orderBy('cidade');
+        return view('cliente.show', ['id' => $id_cliente])
+        ->with(compact('enderecos'));
+    }
+
+    public function createEndereco(int $id_cliente)
+    {
+        $clienteEndereco = null;
+        $cliente = Cliente::find($id_cliente);
+        $enderecos = Endereco::class;
+
+        return view('cliente.formEndereco')
+            ->with(compact('cliente', 'enderecos', 'clienteEndereco'));
+    }
+
+    public function storeEndereco(Request $request, int $id_cliente)
+    {
+        $clienteEndereco = ClienteEndereco::create([
+            'id_cliente'    => $id_cliente,
+            'id_endereco'   => $request->id_endereco,
+        ]);
+
+        return redirect()
+        ->route('cliente.show', ['id' => $id_cliente])
+        ->with('success', 'Endereço Cadastrado com Sucesso!');
+    }
+
+    public function editEndereco(int $id)
+    {
+        $clienteEndereco = ClienteEndereco::find($id);
+        $cliente = $clienteEndereco->cliente();
+        $endereco = ClienteEndereco::class;
+
+        return view('produto.formEndereco')
+            ->with(compact('cliente', 'endereco', 'clienteEndereco'));
+    }
+
+    public function updateEndereco(Request $request, int $id)
+    {
+        $clienteEndereco = ClienteEndereco::find($id);
+        $clienteEndereco->update($request->all());
+
+        return redirect()
+            ->route('cliente.show', ['id' => $clienteEndereco->id_cliente])
+            ->with('success', 'Atualizado com sucesso');
+    }
+
+    public function destroyendereco(int $id)
+    {
+        ClienteEndereco::find($id)->delete();
         return redirect()
             ->back()
-            ->with('danger', 'Removido com sucesso!');
+            ->with('danger', 'Excluído com Sucesso!');
     }
 
 
-     /**
-     * |-------------------------------------------
-     * |         Cliente Endereços
-     * |-------------------------------------------
-     */
-
-     public function createTamanho(int $id_produto)
-     {
-         $produtoTamanho = null;
-         $produto = Produto::find($id_produto);
-         $tamanhos = Tamanho::class;
-
-         return view('produto.formTamanho')
-             ->with(compact('produto', 'tamanhos', 'produtoTamanho'));
-     }
-
-     public function storeTamanho(Request $request, int $id_produto)
-     {
-         $produtoTamanho = ProdutoTamanho::create([
-             'id_produto' => $id_produto,
-             'id_tamanho' => $request->id_tamanho,
-             'preco'      => $request->preco,
-             'observacoes'=> $request->observacoes
-         ]);
-
-         return redirect()
-             ->route('produto.show', ['id' => $id_produto])
-             ->with('success', 'Tamanho cadastrado com sucesso');
-     }
-
-     public function editTamanho(int $id)
-     {
-         $produtoTamanho = ProdutoTamanho::find($id);
-         //$produto = Produto::find($produtoTamanho->id_produto);
-         $produto = $produtoTamanho->produto();
-         $tamanhos = ProdutoTamanho::class;
-
-         return view('produto.formTamanho')
-             ->with(compact(
-             'produto',
-             'tamanhos',
-             'produtoTamanho'
-         ));
-     }
-
-     public function updateTamanho(Request $request, int $id)
-     {
-         $produtoTamanho = ProdutoTamanho::find($id);
-         $produtoTamanho->update($request->all());
-         return redirect()
-         ->route('produto.show',['id' => $produtoTamanho->id_produto]);
-         -with('success', 'Atualizado com sucesso');
-     }
-
-     public function destroyTamanho(int $id)
-     {
-         ProdutoTamanho::find($id)->delete();
-         return redirect()
-         ->back()
-         ->with('danger', 'Removido com sucesso!');
-     }
 }
-

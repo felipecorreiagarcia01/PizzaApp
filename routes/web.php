@@ -1,19 +1,18 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{
+use App\Http\Controllers\
+{
     CargoController,
     ClienteController,
     EnderecoController,
+    ProfileController,
     PedidoController,
     ProdutoController,
     ProdutoTamanhoController,
-    ProfileController,
 };
-use App\Models\Cliente;
-use App\Models\Endereco;
-use App\Models\Pedido;
-use App\Models\Produto;
+use App\Models\Cargo;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +26,14 @@ use App\Models\Produto;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -40,164 +41,136 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-/*
-*--------------------------------
-*           |Cargos|
-*--------------------------------
-*/
-Route::prefix('cargos')
-    ->controller(CargoController::class)
-    ->group(function () {
-        Route::get('/', 'index')
-            ->name('cargo.index');
-        Route::get('/novo', 'create')
-            ->name('cargo.create');
-        Route::get('/{id}', 'show')
-            ->name('cargo.show');
-        Route::get('/editar/{id}', 'edit')
-            ->name('cargo.edit');
-        Route::post('/store', 'store')
-            ->name('cargo.store');
-        Route::post('/update', 'update')
-            ->name('cargo.update');
-        Route::post('/destroy/{id}', 'destroy')
-            ->name('cargo.destroy');
-    });
 
-/*
-*--------------------------------
-*           |Clientes|
-*--------------------------------
-*/
-Route::prefix('clientes')
-    ->controller(ClienteController::class)
-    ->group(function () {
-    Route::get('/', 'index')
-        ->name('cliente.index');
-    Route::get('/novo', 'create')
-        ->name('cliente.create');
-    Route::get('/{id}', 'show')
-        ->name('cliente.show');
-    Route::get('/editar/{id}', 'edit')
-        ->name('cliente.edit');
-    Route::post('/store', 'store')
-        ->name('cliente.store');
-    Route::post('/update', 'update')
-        ->name('cliente.update');
-    Route::post('/destroy', 'destroy')
-        ->name('cliente.destroy');
-});
+/**
+ * ------------------------
+ *        |Cargos|
+ *-------------------------
+ */
 
-/*
-*--------------------------------
-*           |Endereços|
-*--------------------------------
-*/
-// Route::prefix('enderecos')
-//     ->controller(EnderecoController::class)
-//     ->group(function () {
-//     Route::get('/', 'index')
-//         ->name('endereco.index');
-//     Route::get('/novo', 'create')
-//         ->name('endereco.create');
-//     Route::get('/{id}', 'show')
-//         ->name('endereco.show');
-//     Route::get('/editar/{id}', 'edit')
-//         ->name('endereco.edit');
-//     Route::post('/store', 'store')
-//         ->name('endereco.store');
-//     Route::post('/update', 'update')
-//         ->name('endereco.update');
-//     Route::post('/destroy', 'destroy')
-//         ->name('endereco.destroy');
-// });
+ Route::prefix('cargos')
+        ->controller(CargoController::class)
+        ->group(function () {
+            Route::get('/','index')->name('cargo.index');
+            Route::get('/novo','create')->name('cargo.create');
+            Route::get('/{id}','show')->name('cargo.show');
+            Route::get('/editar/{id}','edit')->name('cargo.edit');
 
-/*
-*--------------------------------
-*           |Pedidos|
-*--------------------------------
-*/
-Route::prefix('pedidos')
-    ->controller(PedidoController::class)
-    ->group(function () {
-    Route::get('/', 'index')
-        ->name('pedido.index');
-    Route::get('/novo', 'create')
-        ->name('pedido.create');
-    Route::get('/{id}', 'show')
-        ->name('pedido.show');
-    Route::get('/editar/{id}', 'edit')
-        ->name('pedido.edit');
-    Route::post('/store', 'store')
-        ->name('pedido.store');
-    Route::post('/update', 'update')
-        ->name('pedido.update');
-    Route::post('/destroy', 'destroy')
-        ->name('pedido.destroy');
-});
+            Route::post('/store','store')->name('cargo.store');
+            Route::post('/update','update')->name('cargo.update');
+            Route::post('/destroy/{id}','destroy')->name('cargo.destroy');
+        });
+/**
+ * ------------------------
+ *        |Clientes|
+ * ------------------------
+ */
 
-/*
-*--------------------------------
-*           |Produtos|
-*--------------------------------
-*/
-Route::prefix('produtos')
-    ->controller(ProdutoController::class)
-    ->group(function () {
-    Route::get('/', 'index')
-        ->name('produto.index');
-    Route::get('/novo', 'create')
-        ->name('produto.create');
-    Route::get('/{id}', 'show')
-        ->name('produto.show');
-    Route::get('/editar/{id}', 'edit')
-        ->name('produto.edit');
+ Route::prefix('clientes')
+        ->controller(ClienteController::class)
+        ->group(function () {
+            Route::get('/','index')->name('cliente.index');
+            Route::get('/novo','create')->name('cliente.create');
+            Route::get('/{id}','show')->name('cliente.show');
+            Route::get('/editar/{id_cliente}','edit')->name('cliente.edit');
 
-    Route::get('/tamanho/{id_produto}','createTamanho')
-        ->name('produto.createTamanho');
-    Route::get('/tamanho/editar/{id}','editTamanho')
-        ->name('produto.editTamanho');
+            Route::get('endereco/novo/{id_cliente}','createEndereco')->name('cliente.createEndereco');
+            Route::get('endereco/','indexEndereco')->name('cliente.indexEndereco');
+            Route::get('endereco/editar/{id_cliente_endereco}','editEndereco')->name('cliente.editEndereco');
 
-    Route::post('/store', 'store')
-        ->name('produto.store');
-    Route::post('/update', 'update')
-        ->name('produto.update');
-    Route::post('/destroy', 'destroy')
-        ->name('produto.destroy');
+            Route::post('/store','store')->name('cliente.store');
+            Route::post('/update/{id_cliente}','update')->name('cliente.update');
+            Route::post('/destroy/{id_cliente}','destroy')->name('cliente.destroy');
 
-    Route::post('/tamanho/store/{id_produto}','storeTamanho')
-        ->name('produto.storeTamanho');
-    Route::post('/tamanho/update','updateTamanho')
-        ->name('produto.updateTamanho');
-    Route::post('/tamanho/destroy','destroyTamanho')
-        ->name('produto.destroyTamanho');
+            Route::post('endereco/store/{id_cliente}','storeEndereco')->name('cliente.storeEndereco');
+            Route::post('endereco/update','updateEndereco')->name('cliente.updateEndereco');
+            Route::post('endereco/destroy','destroyEndereco')->name('cliente.destroyEndereco');
+        });
 
-});
+/**
+ * ------------------------
+ *        |Endereço|
+ * ------------------------
+ */
 
-/*
-*--------------------------------
-*       |Produtos Tamanhos|
-*--------------------------------
-*/
-Route::prefix('tamanhos')
-    ->controller(ProdutoTamanhoControllerController::class)
-    ->group(function () {
-    Route::get('/', 'index')
-        ->name('tamanho.index');
-    Route::get('/novo', 'create')
-        ->name('tamanho.create');
-    Route::get('/{id}', 'show')
-        ->name('tamanho.show');
-    Route::get('/editar/{id}', 'edit')
-        ->name('tamanho.edit');
-    Route::post('/store', 'store')
-        ->name('tamanho.store');
-    Route::post('/update', 'update')
-        ->name('tamanho.update');
-    Route::post('/destroy', 'destroy')
-        ->name('tamanho.destroy');
-});
+//  Route::prefix('enderecos')
+//         ->controller(EnderecoController::class)
+//         ->group(function () {
+//             Route::get('/','index')->name('endereco.index');
+//             Route::get('/novo','create')->name('endereco.create');
+//             Route::get('/{id}','show')->name('endereco.show');
+//             Route::get('/editar/{id}','edit')->name('endereco.edit');
 
+//             Route::post('/store','store')->name('endereco.store');
+//             Route::post('/update','update')->name('endereco.update');
+//             Route::post('/destroy','destroy')->name('endereco.destroy');
+//         });
+
+/**
+ * ------------------------
+ *        |Pedidos|
+ * ------------------------
+ */
+
+ Route::prefix('pedidos')
+        ->controller(PedidoController::class)
+        ->group(function () {
+            Route::get('/','index')->name('pedido.index');
+            Route::get('/novo','create')->name('pedido.create');
+            Route::get('/{id}','show')->name('pedido.show');
+            Route::get('/editar/{id}','edit')->name('pedido.edit');
+
+            Route::post('/store','store')->name('pedido.store');
+            Route::post('/update','update')->name('pedido.update');
+            Route::post('/destroy','destroy')->name('pedido.destroy');
+        });
+/**
+ * ------------------------
+ *        |Produtos|
+ * ------------------------
+ */
+
+ Route::prefix('produtos')
+        ->controller(ProdutoController::class)
+        ->group(function () {
+            Route::get('/','index')->name('produto.index');
+            Route::get('/novo','create')->name('produto.create');
+            Route::get('/{id}','show')->name('produto.show');
+            Route::get('/editar/{id}','edit')->name('produto.edit');
+
+
+            Route::get('/tamanho/{id_produto}','createTamanho')->name('produto.createTamanho');
+            Route::get('/tamanho/editar/{id}','editarTamanho')->name('produto.editTamanho');
+
+
+            Route::post('/store','store')->name('produto.store');
+            Route::post('/update','update')->name('produto.update');
+            Route::post('/destroy','destroy')->name('produto.destroy');
+
+            Route::post('/tamanho/store/{id_produto}', 'storeTamanho')->name('produto.storeTamanho');
+            Route::post('/tamanho/update', 'updateTamanho')->name('produto.updateTamanho');
+            Route::post('/tamanho/destroy', 'destroyTamanho')->name('produto.destroyTamanho');
+
+        });
+/**
+ * ------------------------
+ *   |Produtos Tamanhos|
+ * -----------------------
+ */
+
+ Route::prefix('tamanhos')
+        ->controller(ProdutoTamanhoController::class)
+        ->group(function () {
+            Route::get('/','index')->name('tamanho.index');
+            Route::get('/novo','create')->name('tamanho.create');
+            Route::get('/{id}','show')->name('tamanho.show');
+            Route::get('/editar/{id}','edit')->name('tamanho.edit');
+
+            Route::post('/store','store')->name('tamanho.store');
+            Route::post('/update','update')->name('tamanho.update');
+            Route::post('/destroy','destroy')->name('tamanho.destroy');
+        });
 
 
 require __DIR__.'/auth.php';
+
