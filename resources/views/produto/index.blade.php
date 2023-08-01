@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>Produtos</h1>
-    <a class="btn btn-primary" href="{{ route('produto.create') }}">Cadastrar Novo Produto</a>
+    <a class="btn btn-primary" href="{{ route('') }}">Cadastrar Novo Produto</a>
     <table class="table table-striped">
      <thead>
         <tr>

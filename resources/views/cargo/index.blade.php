@@ -2,6 +2,17 @@
 @extends('layouts.base')
 @section('content')
 <h1>Cargos</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <label class="form-label" for="cargo">
+            Cargo
+        </label>
+    <input class="form-control" type="text" name="cargo" id="cargo">
+    </div>
+    <a class="btn btn-success mt-2" href="{{ route('cargo.store', ['id_cargo'=>$cargo->id_cargo]) }}"></a>
+</div>
+
 <table class="table table-striped">
      <thead>
         <tr>

@@ -5,7 +5,7 @@
         ($produto) ? 'Editar Produto' : 'Cadastrar Produto'
     }}
 </h2>
-<form action="{{ ($produto) ? route('produto.update') : route('produto.store',['id'=>$produto->id_produto]) }}" method="post" enctype="multipart/form-data">
+<form action="{{ ($produto) ? route('produto.update') : route('produto.store',['id_produto'=>$produto->id_produto]) }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-md-3">
