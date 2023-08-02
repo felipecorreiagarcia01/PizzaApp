@@ -5,7 +5,7 @@
         ($produto) ? 'Editar Produto' : 'Cadastrar Produto'
     }}
 </h2>
-<form action="{{ ($produto) ? route('produto.update') : route('produto.store',['id_produto'=>$produto->id_produto]) }}" method="post" enctype="multipart/form-data">
+<form action="{{ ($produto) ? route('produto.update', ['id_produto' => $produto->id_produto]) : route('produto.store')}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-md-3">
@@ -40,7 +40,7 @@
 
         <div class="col-md-3">
             <label class="form-label" for="foto">
-                Descrição
+                Foto
             </label>
             <input class="form-control" type="file" name="foto" id="foto"value="{{
                 ($produto) ? $produto->foto : old('foto') }}">

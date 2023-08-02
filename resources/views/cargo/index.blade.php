@@ -4,15 +4,17 @@
 <h1>Cargos</h1>
 
 <div class="row">
-    <div class="col-md-3">
-        <label class="form-label" for="cargo">
-            Cargo
-        </label>
-    <input class="form-control" type="text" name="cargo" id="cargo">
+    <div class="col-md-2">
+        <form action="{{ route('cargo.store') }}" method="post" enctype="multipart/form-data">
+            @csrf
+        <label class="form-label" for="cargo"></label>
+        <input class="form-control" type="text" name="cargo" id="cargo">
     </div>
-    <a class="btn btn-success mt-2" href="{{ route('cargo.store', ['id_cargo'=>$cargo->id_cargo]) }}"></a>
+    <div class="col-md-3 mt-4">
+        <input class="btn btn-success" type="submit" value="Cadastrar">
+    </div>
 </div>
-
+        </form>
 <table class="table table-striped">
      <thead>
         <tr>
