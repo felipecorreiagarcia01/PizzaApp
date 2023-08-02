@@ -13,6 +13,7 @@ use App\Http\Controllers\
     ProdutoTamanhoController,
 };
 use App\Models\Cargo;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,9 @@ Route::middleware('auth')->group(function () {
             Route::post('/store','store')->name('cargo.store');
             Route::post('/update','update')->name('cargo.update');
             Route::post('/destroy/{id}','destroy')->name('cargo.destroy');
+
+
+
         });
 /**
  * ------------------------
@@ -170,6 +174,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/update','update')->name('tamanho.update');
             Route::post('/destroy','destroy')->name('tamanho.destroy');
         });
+
 
 
 require __DIR__.'/auth.php';

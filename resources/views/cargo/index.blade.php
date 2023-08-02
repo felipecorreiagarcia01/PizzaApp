@@ -2,7 +2,6 @@
 @extends('layouts.base')
 @section('content')
 <h1>Cargos</h1>
-
 <div class="row">
     <div class="col-md-2">
         <form action="{{ route('cargo.store') }}" method="post" enctype="multipart/form-data">
