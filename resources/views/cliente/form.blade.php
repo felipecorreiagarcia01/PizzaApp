@@ -15,24 +15,14 @@
             <label class="form-label" for="nome">
                 Nome*
             </label>
-
-            @if ($cliente)
-                <input class="form-control" type="text" name="nome" id="nome" value="{{$cliente->nome}}" required>
-            @else
-                <input class="form-control" type="text" name="nome" id="nome" required>
-            @endif
+                <input class="form-control" type="text" name="nome" id="nome" value="{{($cliente)? $cliente->nome : old('nome')}}" required>
         </div>
 
         <div class="col-md-3">
             <label class="form-label" for="ddd" >
                 DDD
             </label>
-
-            @if ($cliente)
-                <input class="form-control" type="tel" name="ddd" id="ddd" value="{{$cliente->ddd}}" required>
-            @else
-                <input class="form-control" type="tel" name="ddd" id="ddd" required>
-            @endif
+                <input class="form-control" type="tel" name="ddd" id="ddd" value="{{($cliente)? $cliente->ddd : old('ddd')}}" required>
 
         </div>
 
@@ -41,11 +31,8 @@
                 Celular
             </label>
 
-            @if ($cliente)
-                <input class="form-control" type="tel" name="celular" id="celular" value="{{$cliente->celular}}" required>
-            @else
-                <input class="form-control" type="tel" name="celular" id="celular" required>
-            @endif
+                <input class="form-control" type="tel" name="celular" id="celular" value="{{($cliente)? $cliente->celular : old('celular')}}" required>
+
 
         </div>
 
@@ -53,13 +40,7 @@
             <label class="form-label" for="email" >
                 Email
             </label>
-
-            @if ($cliente)
-                <input class="form-control" type="email" name="email" id="email" value="{{$cliente->email}}">
-            @else
-                <input class="form-control" type="email" name="email" id="email" value="">
-            @endif
-
+                <input class="form-control" type="email" name="email" id="email" value="{{($cliente)? $cliente->email : old('email')}}">
         </div>
 
         <div class="col-12 mt-3">
@@ -67,12 +48,7 @@
                 Observações
             </label>
 
-            @if ($cliente)
-            <textarea class="form-control" name="observacoes" id="observacoes">{!! $cliente->observacoes !!}</textarea>
-            @else
-            <textarea class="form-control" name="observacoes" id="observacoes"></textarea>
-            @endif
-
+            <textarea class="form-control" name="observacoes" id="observacoes">{{($cliente)? $cliente->observacoes : old('observacoes')}}</textarea>
         </div>
 
     </div>

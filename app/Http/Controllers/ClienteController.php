@@ -120,6 +120,8 @@ class ClienteController extends Controller
 
     public function storeEndereco(Request $request, int $id_cliente)
     {
+        $endereco = Endereco::create($request->all());
+
         $clienteEndereco = ClienteEndereco::create([
             'id_cliente'    => $id_cliente,
             'id_endereco'   => $request->id_endereco,

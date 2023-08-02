@@ -9,8 +9,9 @@
             Cargo
         </label>
     <input class="form-control" type="text" name="cargo" id="cargo">
+    <a class="btn btn-success mt-2" href="{{route('cargo.store') }}">Cadastrar Novo Cargo</a>
     </div>
-    <a class="btn btn-success mt-2" href="{{ route('cargo.store', ['id_cargo'=>$cargo->id_cargo]) }}"></a>
+
 </div>
 
 <table class="table table-striped">
