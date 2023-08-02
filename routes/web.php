@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/editar/{id}','edit')->name('cargo.edit');
 
             Route::post('/store','store')->name('cargo.store');
-            Route::post('/update','update')->name('cargo.update');
+            Route::post('/update/{id_cargo}','update')->name('cargo.update');
             Route::post('/destroy/{id}','destroy')->name('cargo.destroy');
 
 
@@ -128,34 +128,44 @@ Route::middleware('auth')->group(function () {
             Route::post('/update','update')->name('pedido.update');
             Route::post('/destroy','destroy')->name('pedido.destroy');
         });
-/**
- * ------------------------
- *        |Produtos|
- * ------------------------
+/*
+ * |--------------------------------------------------------------------------
+ * | Produto
+ * |--------------------------------------------------------------------------
  */
+Route::prefix('produtos')
+    ->controller(ProdutoController::class)
+    ->group(function () {
+        Route::get('/', 'index')
+            ->name('produto.index');
+        Route::get('/novo', 'create')
+            ->name('produto.create');
+        Route::get('/{id}', 'show')
+            ->name('produto.show');
+        Route::get('/editar/{id}', 'edit')
+            ->name('produto.edit');
 
- Route::prefix('produtos')
-        ->controller(ProdutoController::class)
-        ->group(function () {
-            Route::get('/','index')->name('produto.index');
-            Route::get('/novo','create')->name('produto.create');
-            Route::get('/{id}','show')->name('produto.show');
-            Route::get('/editar/{id}','edit')->name('produto.edit');
+        Route::get('/tamanho/{id_produto}', 'createTamanho')
+            ->name('produto.createTamanho');
+        Route::get('/tamanho/editar/{id}', 'editTamanho')
+            ->name('produto.editTamanho');
 
+        Route::post('/store', 'store')
+            ->name('produto.store');
+        Route::post('/update/{id}', 'update')
+            ->name('produto.update');
+        Route::post('/destroy/{id}', 'destroy')
+            ->name('produto.destroy');
 
-            Route::get('/tamanho/{id_produto}','createTamanho')->name('produto.createTamanho');
-            Route::get('/tamanho/editar/{id}','editarTamanho')->name('produto.editTamanho');
+        Route::post('/tamanho/store/{id_produto}', 'storeTamanho')
+            ->name('produto.storeTamanho');
+        Route::post('/tamanho/update', 'updateTamanho')
+            ->name('produto.updateTamanho');
+        Route::post('/tamanho/destroy', 'destroyTamanho')
+            ->name('produto.destroyTamanho');
+    });
 
-
-            Route::post('/store','store')->name('produto.store');
-            Route::post('/update','update')->name('produto.update');
-            Route::post('/destroy','destroy')->name('produto.destroy');
-
-            Route::post('/tamanho/store/{id_produto}', 'storeTamanho')->name('produto.storeTamanho');
-            Route::post('/tamanho/update', 'updateTamanho')->name('produto.updateTamanho');
-            Route::post('/tamanho/destroy', 'destroyTamanho')->name('produto.destroyTamanho');
-
-        });
+    
 /**
  * ------------------------
  *   |Produtos Tamanhos|

@@ -16,12 +16,11 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        $produtos = Produto::orderBy('nome');
+        $produtos = Produto::orderBy('nome')->paginate(10);
 
         return view('produto.index')
             ->with(compact('produtos'));
     }
-
 
     public function create()
     {
@@ -38,11 +37,25 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $produto = Produto::create($request->all());
+        //subir a foto
+        if($request->foto){
+            //pegar a extensão do arquivo
+            $extension =  $request->foto->getClientOriginalExtension();
+            //criar um nome unico para o arquivo
+            $nomeFoto = date('YmdHis').rand(0,1000).'.'.$extension;
+            //subir o arquivo para a pasta fotos
+            $request->foto->storeAs('/public/fotos',$nomeFoto);
+            //atribuir o nome do arquivo a propriedade foto
+            $produto->foto = $nomeFoto;
+            $produto->save();
+        }
         return redirect()
-            ->route('produto.show', ['id' => $produto->id_produto])
+            ->route(
+                'produto.show',
+                ['id' => $produto->id_produto]
+            )
             ->with('success', 'Cadastrado com sucesso.');
     }
-
 
     public function show(int $id)
     {

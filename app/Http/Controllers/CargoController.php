@@ -71,9 +71,9 @@ class CargoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id_cargo)
     {
-        $cargo = Cargo::find($id);
+        $cargo = Cargo::find($id_cargo);
         $cargo->update($request->all());
         return redirect()
             ->route('cargo.index')
