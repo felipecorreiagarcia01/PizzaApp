@@ -37,17 +37,11 @@
                             <i class="bi bi-eye-fill"></i>
                         </a>
 
-                        <button type="button" class="btn btn-danger ml-1" data-bs-toggle="modal"
-                            data-bs-target="#modalExcluir"
-                            data-identificacao="Nº {{ $produto->id_produto }} : {{ $produto->nome }}"
-                            data-url="{!! route('produto.destroy', ['id' => $produto->id_produto]) !!}">
-                            <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Excluir">
-                                <i class="bi bi-trash3-fill"></i>
-                            </span>
-                        </button>
-                        {{-- <a class="btn btn-danger" href="{{ route('produto.destroy', ['id' => $produto->id_produto]) }}">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </a> --}}
+                        <form action="{{ route('produto.destroy',['id'=>$produto->id_produto])}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class=" btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
                     </td>
                     <td>
                         {{ $produto->id_produto }}

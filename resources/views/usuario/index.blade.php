@@ -6,7 +6,7 @@
 @include('layouts.partials.menu')
 
     <h1>
-        <i class="fa-solid fa-pizza-slice"></i>
+        <i class="bi bi-person-circle"></i>
        Usuarios -
         <a href="{{route('usuario.create')}}" class="btn btn-primary">
             Novo Usuario
