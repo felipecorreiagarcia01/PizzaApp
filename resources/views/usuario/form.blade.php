@@ -5,7 +5,7 @@
     @include('layouts.partials.menu')
 
     <h1>
-        <i class="fa-solid fa-pizza-slice"></i>
+        <i class="bi bi-person-circle"></i>
 
         @if ($user)
             Atualizar Usuário
