@@ -1,6 +1,10 @@
 @extends('layouts.base')
 @section('content')
 
+{{-- Menu --}}
+@include('layouts.partials.menu')
+
+
 <h1>Clientes</h1>
 <h6>
     <a class="btn btn-primary" href="{{ route('cliente.create')}}">Cadastrar novo Cliente</a>

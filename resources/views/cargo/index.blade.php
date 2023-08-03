@@ -1,12 +1,16 @@
 
 @extends('layouts.base')
 @section('content')
+
+{{-- Menu --}}
+@include('layouts.partials.menu')
+
 <h1>Cargos</h1>
 <div class="row">
     <div class="col-md-2">
         <form action="{{ route('cargo.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-        <label class="form-label" for="cargo"></label>
+        <label class="form-label" for="cargo">Cadastrar Novo Cargo</label>
         <input class="form-control" type="text" name="cargo" id="cargo">
     </div>
     <div class="col-md-3 mt-4">

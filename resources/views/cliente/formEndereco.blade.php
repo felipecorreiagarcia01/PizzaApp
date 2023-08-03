@@ -7,7 +7,7 @@
     }}
 </h1>
 
-<form action="{{ ($clienteEndereco) ? route('cliente.updateEndereco') : route('cliente.storeEndereco', ['id_cliente' => $cliente->id_cliente])}}" method="post" enctype="multipart/form-data">
+<form action="{{ ($clienteEndereco) ? route('cliente.updateEndereco',['id_cliente' => $clienteEndereco->cliente->id_cliente ,'id_endereco' => $clienteEndereco->endereco->id_endereco]) : route('cliente.storeEndereco', ['id_cliente' => $cliente->id_cliente])}}" method="post" enctype="multipart/form-data">
     @csrf
 
     <div class="row">
@@ -16,7 +16,7 @@
                 Endereco*
             </label>
 
-            <input class="form-control" type="text" name="endereco" id="endereco" value="{{ ($clienteEndereco)?$clienteEndereco->endereco : old('endereco') }}" required>
+            <input class="form-control" type="text" name="endereco" id="endereco" value="{{ $clienteEndereco ?$clienteEndereco->endereco->endereco : old('endereco') }}" required>
         </div>
 
         <div class="col-md-2">

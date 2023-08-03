@@ -7,12 +7,12 @@
 
     <h1>
         <i class="fa-solid fa-pizza-slice"></i>
-        Produtos -
-        <a href="{{route('produto.create')}}" class="btn btn-primary">
-            Novo Produto
+       Usuarios -
+        <a href="{{route('usuario.create')}}" class="btn btn-primary">
+            Novo Usuario
         </a>
     </h1>
-    <p>{{ $produtos->onEachSide(5)->links() }}</p>
+    <p>{{ $users->onEachSide(5)->links() }}</p>
     {{-- Alerts --}}
     @include('layouts.partials.alerts')
     <table class="table table-striped table-hover">
@@ -20,27 +20,27 @@
             <tr>
                 <th class="col-2">Ações</th>
                 <th class="col-1">ID</th>
-                <th>Produto</th>
-                <th>Observações</th>
-                <th>Qtd Tamanhos</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>ID Cargo</th>
 
             </tr>
         </thead>
         <tbody>
-            @foreach ($produtos as $produto)
+            @foreach ($users as $user)
                 <tr>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('produto.edit', ['id' => $produto->id_produto]) }}">
+                        <a class="btn btn-primary" href="{{ route('usuario.edit', ['id' => $user->id]) }}">
                             <i class="bi bi-pencil-square"></i>
                         </a>
-                        <a class="btn btn-success" href="{{ route('produto.show', ['id' => $produto->id_produto]) }}">
+                        <a class="btn btn-success" href="{{ route('usuario.show', ['id' => $user->id]) }}">
                             <i class="bi bi-eye-fill"></i>
                         </a>
 
                         <button type="button" class="btn btn-danger ml-1" data-bs-toggle="modal"
                             data-bs-target="#modalExcluir"
-                            data-identificacao="Nº {{ $produto->id_produto }} : {{ $produto->nome }}"
-                            data-url="{!! route('produto.destroy', ['id' => $produto->id_produto]) !!}">
+                            data-identificacao="Nº {{ $user->id }} : {{ $user->nome }}"
+                            data-url="{!! route('produto.destroy', ['id' => $user->id]) !!}">
                             <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Excluir">
                                 <i class="bi bi-trash3-fill"></i>
                             </span>
@@ -50,19 +50,15 @@
                         </a> --}}
                     </td>
                     <td>
-                        {{ $produto->id_produto }}
+                        {{ $user->id }}
 
                     </td>
+                    <td>{{ $user->nome}}</td>
                     <td>
-                        {{ $produto->nome }}
-                        @if ($produto->foto)
-                        <br>
-                        <img src="{{ url('storage/fotos/' . $produto->foto) }}" lass="img-thumbnail" width="250">
-                        @endif
+                        {{ $user->email}}
                     </td>
-                    <td>{{ nl2br($produto->observacoes) }}</td>
                     <td>
-                        {!! $produto->tamanhos()->count() !!}
+                        {{ $user->id_cargo}}
                     </td>
                 </tr>
             @endforeach

@@ -139,18 +139,30 @@ class ClienteController extends Controller
         $cliente = $clienteEndereco->cliente();
         $endereco = ClienteEndereco::class;
 
-        return view('produto.formEndereco')
+        return view('cliente.formEndereco')
             ->with(compact('cliente', 'endereco', 'clienteEndereco'));
     }
 
-    public function updateEndereco(Request $request, int $id)
+    public function updateEndereco(Request $request, int $id_cliente, int $id_endereco)
     {
-        $clienteEndereco = ClienteEndereco::find($id);
-        $clienteEndereco->update($request->all());
+        $clienteEndereco = ClienteEndereco::where('id_cliente', $id_cliente)
+            ->where('id_endereco', $id_endereco)
+            ->first();
 
-        return redirect()
-            ->route('cliente.show', ['id' => $clienteEndereco->id_cliente])
-            ->with('success', 'Atualizado com sucesso');
+        $endereco = Endereco::find($id_endereco);
+        $endereco->update($request->all());
+
+        return redirect()->route('cliente.show', ['id' => $clienteEndereco->cliente->id_cliente])
+        ->with('success', 'Atualizado com Sucesso!');
+
+
+
+        // $clienteEndereco = ClienteEndereco::find($id_endereco);
+        // $clienteEndereco->update($request->all());
+
+        // return redirect()
+        //     ->route('cliente.show', ['id' => $clienteEndereco->id_cliente])
+        //     ->with('success', 'Atualizado com sucesso');
     }
 
     public function destroyendereco(int $id)
