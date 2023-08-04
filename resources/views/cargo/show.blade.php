@@ -12,7 +12,7 @@
     <tbody>
         <tr>
             <td>
-            <a class="btn btn-primary" href="#">
+            <a class="btn btn-primary" href="{{ route('cargo.edit', ['id'=>$cargo->id_cargo]) }}">
             <i class="bi bi-pencil-square"></i>
             </a>
             </td>

@@ -40,7 +40,7 @@
                         <button type="button" class="btn btn-danger ml-1" data-bs-toggle="modal"
                             data-bs-target="#modalExcluir"
                             data-identificacao="Nº {{ $user->id }} : {{ $user->nome }}"
-                            data-url="{!! route('produto.destroy', ['id' => $user->id]) !!}">
+                            data-url="{!! route('usuario.destroy', ['id' => $user->id]) !!}">
                             <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Excluir">
                                 <i class="bi bi-trash3-fill"></i>
                             </span>

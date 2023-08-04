@@ -2,64 +2,163 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pedido;
+
 use Illuminate\Http\Request;
 
+use App\Models\{
+    Cliente,
+    TipoPagamento,
+    TipoPedido,
+    User,
+    Pedido,
+    Status,
+
+};
+
+
+
 class PedidoController extends Controller
+
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
+
     {
-        //
+
+        $pedidos = Pedido::orderBy('id_pedido')
+            ->get();
+        return view('pedido.index')
+            ->with(compact('pedidos'));
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
+
+
     public function create()
+
     {
-        //
+        $pedido = null;
+        $tiposPedido = TipoPedido::class;
+        $users = User::class;
+        $clientes = Cliente::class;
+        $tipoPagamento =  TipoPagamento::class;
+
+        return view('pedido.form')
+
+            ->with(compact(
+
+                'pedido',
+
+                'tiposPedido',
+
+                'users',
+
+                'clientes',
+
+                'tipoPagamento',
+
+            ));
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+
     public function store(Request $request)
+
     {
-        //
+
+        $pedido = Pedido::create($request->all());
+
+
+
+        return redirect()
+
+            ->route(
+
+                'pedido.show',
+
+                ['id' => $pedido->id_pedido]
+
+            )
+
+            ->with('success', 'Cadastrado com sucesso.');
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pedido $pedido)
+
+
+    public function show(int $id)
+
     {
-        //
+
+        $pedido = Pedido::find($id);
+
+        $tiposPedido = TipoPedido::class;
+
+
+
+        return view('pedido.show')
+
+            ->with(compact('pedido'));
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Pedido $pedido)
+
+
+
+
+    public function edit(int $id)
+
     {
-        //
+        $pedido = Pedido::find($id);
+
+        return view('pedido.form')
+            ->with(compact(
+                'pedido'));
+
+
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Pedido $pedido)
+
+
+    // public function update(Request $request, int $id)
+
+    // {
+    //     $pedido = null;
+    //     $pedido->update($request->all());
+
+
+
+    //     return redirect()
+
+    //         ->route(
+
+    //             'pedido.show',
+
+    //             ['id' => $pedido->id_pedido]
+
+    //         )
+
+    //         ->with('success', 'Atualizado com sucesso!');
+
+    // }
+
+
+    public function destroy(int $id)
+
     {
-        //
+
+        Pedido::find($id)->delete();
+
+        return redirect()
+
+            ->back()
+
+            ->with('destroy','Excluído com sucesso!');
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Pedido $pedido)
-    {
-        //
-    }
 }
+

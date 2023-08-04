@@ -58,6 +58,12 @@
             <tr>
                 <td>
                     <a class="btn btn-success" href="{{ route('cliente.editEndereco', ['id_endereco'=>$item->id_cliente_endereco]) }}"><i class="bi bi-pencil"></i></a>
+
+                    <form action="{{ route('cliente.destroyEndereco',['id_endereco'=>$item->id_endereco])}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class=" btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
                 </td>
 
                 <td>

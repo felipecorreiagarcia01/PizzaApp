@@ -3,12 +3,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-house"></i>
-                        Home
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{route('pedido.index')}}">
                         <i class="fa-solid fa-file-invoice-dollar"></i>
                         Pedidos
@@ -38,6 +32,13 @@
                         Usuários
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('cargo.index') }}">
+                        <i class="bi bi-bag-fill"></i>
+                        Cargos
+                    </a>
+                </li>
+
 
             </ul>
         </div>

@@ -38,9 +38,11 @@
                 <a class="btn btn-warning" href="{{ route('cargo.show', ['id'=>$cargo->id_cargo]) }}">
                     <i class="bi bi-eye-fill"></i>
                 </a>
-                <a class="btn btn-danger" href="{{ route('cargo.destroy', ['id'=>$cargo->id_cargo]) }}">
-                    <i class="bi bi-trash3-fill"></i>
-                </a>
+
+                    <form action="{{ route('cliente.destroy',['id_cliente'=>$cargo->id_cargo])}}" method="post">
+                        @csrf
+                        <button class=" btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                    </form>
             </td>
             <td>{{ $cargo->id_cargo }}</td>
             <td>{{ $cargo->cargo }}</td>
