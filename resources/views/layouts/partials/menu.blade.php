@@ -32,6 +32,12 @@
                         Tamanhos
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('usuario.index') }}">
+                        <i class="bi bi-person-circle"></i>
+                        Usuários
+                    </a>
+                </li>
 
             </ul>
         </div>

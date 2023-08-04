@@ -5,10 +5,15 @@
 @include('layouts.partials.menu')
 
 
-<h1>Clientes</h1>
-<h6>
-    <a class="btn btn-primary" href="{{ route('cliente.create')}}">Cadastrar novo Cliente</a>
-</h6>
+<h1>
+    <i class="bi bi-person-circle"></i>
+    Clientes-
+    <a class="btn btn-primary" href="{{ route('cliente.create')}}">Novo Cliente</a>
+</h1>
+
+
+<p>{{ $clientes->onEachSide(5)->links() }}</p>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -19,7 +24,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($clientes->get() as $cliente )
+        @foreach ($clientes as $cliente )
 
         <tr>
             <td>

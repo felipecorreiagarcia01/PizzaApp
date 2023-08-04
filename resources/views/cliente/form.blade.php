@@ -2,6 +2,7 @@
 @section('content')
 
 <h1>
+    <i class="bi bi-person-circle"></i>
     {{
         ($cliente) ? 'Editar Cliente' : 'Cadastrar Cliente'
     }}
@@ -10,17 +11,25 @@
 <form action="{{ ($cliente) ? route('cliente.update', ['id_cliente' => $cliente->id_cliente]) : route('cliente.store')}}" method="post" enctype="multipart/form-data">
     @csrf
 
+    {{-- Dados do Cliente --}}
+    <div class="card-deck">
+        <div class="card border-dark mt-1">
+            <div class="card-header">
+                <h5>
+                    Dados do Cliente
+                </h5>
+            </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 ">
             <label class="form-label" for="nome">
                 Nome*
             </label>
                 <input class="form-control" type="text" name="nome" id="nome" value="{{($cliente)? $cliente->nome : old('nome')}}" required>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label" for="ddd" >
-                DDD
+                DDD*
             </label>
                 <input class="form-control" type="tel" name="ddd" id="ddd" value="{{($cliente)? $cliente->ddd : old('ddd')}}" required>
 
@@ -28,19 +37,17 @@
 
         <div class="col-md-3">
             <label class="form-label" for="celular" >
-                Celular
+                Celular*
             </label>
 
                 <input class="form-control" type="tel" name="celular" id="celular" value="{{($cliente)? $cliente->celular : old('celular')}}" required>
-
-
         </div>
 
         <div class="col-md-3">
             <label class="form-label" for="email" >
-                Email
+                Email*
             </label>
-                <input class="form-control" type="email" name="email" id="email" value="{{($cliente)? $cliente->email : old('email')}}">
+                <input class="form-control" type="email" name="email" id="email" value="{{($cliente)? $cliente->email : old('email')}}" required>
         </div>
 
         <div class="col-12 mt-3">
@@ -52,15 +59,19 @@
         </div>
 
     </div>
-    <div class="mt-4"></div>
-
-    @if ($cliente)
-        <input class="btn btn-warning" type="submit" value="Atualizar Cliente">
-    @else
-        <input class="btn btn-success" type="submit" value="Cadastrar Cliente">
-    @endif
-
-</form>
+    <button class="btn btn-success mt-3  col-md-3 offset-md-9" type="submit"
+                        data-loading-text="Salvando...">
+                        <i class="fa fa-save"></i>
+                        @if ($cliente)
+                            Atualizar Cliente
+                        @else
+                            Cadastrar Cliente
+                        @endif
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
 
 @endsection
 

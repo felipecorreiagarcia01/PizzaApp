@@ -33,6 +33,7 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
+    
         $user = User::create($request->all());
         return redirect()
             ->route('usuario.show')
@@ -57,8 +58,8 @@ class UsuarioController extends Controller
         $cargo = Cargo::class;
         return view('usuario.form')
             ->with(compact(
-                'produto',
-                'tiposProduto'
+                'user',
+                'cargo'
             ));
     }
 
@@ -66,6 +67,7 @@ class UsuarioController extends Controller
     public function update(Request $request, int $id)
     {
         $user = User::find($id);
+
         $user->update($request->all());
         return redirect()
             ->route('usuario.show')
