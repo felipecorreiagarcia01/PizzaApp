@@ -124,8 +124,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/editar/{id}','edit')->name('pedido.edit');
 
             Route::post('/store','store')->name('pedido.store');
-            Route::post('/update','update')->name('pedido.update');
-            Route::post('/destroy/{id}','destroy')->name('pedido.destroy');
+            Route::post('/update/{id}','update')->name('pedido.update');
+            Route::post('/destroy/{id_pedido}','destroy')->name('pedido.destroy');
         });
 /*
  * |--------------------------------------------------------------------------
@@ -199,7 +199,7 @@ Route::prefix('produtos')
             Route::get('/editar/{id}','edit')->name('usuario.edit');
 
             Route::post('/store','store')->name('usuario.store');
-            Route::post('/update/{id_usuario}','update')->name('usuario.update');
+            Route::post('/update/{id}','update')->name('usuario.update');
             Route::post('/destroy/{id}','destroy')->name('usuario.destroy');
 
         });

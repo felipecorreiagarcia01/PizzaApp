@@ -51,10 +51,10 @@
                             <label for="email" class="form-label">Email*</label>
                             <input type="email" name="email" id="email" class="form-control" value="{{!! $user ? $user->email : old('email')}}">
                         </div>
-                        <div class="col-12 md-6">
+                        {{-- <div class="col-12 md-6">
                             <label for="senha" class="form-label">Senha*</label>
                             <input type="password" name="senha" id="senha" class="form-control" value="{{!! $user ? $user->password : old('password')}}">
-                        </div>
+                        </div> --}}
 
                     </div>
                     <button class="btn btn-success mt-3 col-md-3 offset-md-9" type="submit"

@@ -28,10 +28,10 @@
 
         <tr>
             <td>
-                <a class="btn btn-success" href="{{route('cliente.edit', ['id_cliente'=>$cliente->id_cliente])}}">
+                <a class="btn btn-primary" href="{{route('cliente.edit', ['id_cliente'=>$cliente->id_cliente])}}">
                     <i class="bi bi-pencil-square"></i>
                 </a>
-                <a class="btn btn-primary" href="{{ route('cliente.show', ['id'=>$cliente->id_cliente])}}">
+                <a class="btn btn-warning" href="{{ route('cliente.show', ['id'=>$cliente->id_cliente])}}">
                     <i class="bi bi-eye-fill"></i>
                 </a>
                 <form action="{{ route('cliente.destroy',['id_cliente'=>$cliente->id_cliente])}}" method="post">

@@ -25,8 +25,7 @@ class PedidoController extends Controller
 
     {
 
-        $pedidos = Pedido::orderBy('id_pedido')
-            ->get();
+        $pedidos = Pedido::orderBy('id_pedido')->paginate(10);
         return view('pedido.index')
             ->with(compact('pedidos'));
 
@@ -67,23 +66,13 @@ class PedidoController extends Controller
     public function store(Request $request)
 
     {
-
         $pedido = Pedido::create($request->all());
-
-
-
         return redirect()
-
             ->route(
-
                 'pedido.show',
-
                 ['id' => $pedido->id_pedido]
-
             )
-
             ->with('success', 'Cadastrado com sucesso.');
-
     }
 
 
@@ -112,50 +101,44 @@ class PedidoController extends Controller
 
     {
         $pedido = Pedido::find($id);
+        $tiposPedido = TipoPedido::class;
+        $users = User::class;
+        $tipoPagamento = TipoPagamento::class;
+        $clientes = Cliente::class;
 
         return view('pedido.form')
             ->with(compact(
-                'pedido'));
+                'pedido',
+                'tiposPedido',
+                'users',
+                'tipoPagamento',
+                'clientes'
+            ));
 
 
 
     }
 
+    public function update(Request $request, int $id)
 
-
-    // public function update(Request $request, int $id)
-
-    // {
-    //     $pedido = null;
-    //     $pedido->update($request->all());
-
-
-
-    //     return redirect()
-
-    //         ->route(
-
-    //             'pedido.show',
-
-    //             ['id' => $pedido->id_pedido]
-
-    //         )
-
-    //         ->with('success', 'Atualizado com sucesso!');
-
-    // }
+    {
+        $pedido = Pedido::find($id);
+        $pedido->update($request->all());
+        return redirect()
+            ->route(
+                'pedido.show',
+                ['id' => $pedido->id_pedido]
+            )
+            ->with('success', 'Atualizado com sucesso!');
+    }
 
 
     public function destroy(int $id)
 
     {
-
         Pedido::find($id)->delete();
-
         return redirect()
-
             ->back()
-
             ->with('destroy','Excluído com sucesso!');
 
     }

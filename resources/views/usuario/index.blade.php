@@ -33,21 +33,14 @@
                         <a class="btn btn-primary" href="{{ route('usuario.edit', ['id' => $user->id]) }}">
                             <i class="bi bi-pencil-square"></i>
                         </a>
-                        <a class="btn btn-success" href="{{ route('usuario.show', ['id' => $user->id]) }}">
+                        <a class="btn btn-warning" href="{{ route('usuario.show', ['id' => $user->id]) }}">
                             <i class="bi bi-eye-fill"></i>
                         </a>
-
-                        <button type="button" class="btn btn-danger ml-1" data-bs-toggle="modal"
-                            data-bs-target="#modalExcluir"
-                            data-identificacao="Nº {{ $user->id }} : {{ $user->nome }}"
-                            data-url="{!! route('usuario.destroy', ['id' => $user->id]) !!}">
-                            <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Excluir">
-                                <i class="bi bi-trash3-fill"></i>
-                            </span>
-                        </button>
-                        {{-- <a class="btn btn-danger" href="{{ route('produto.destroy', ['id' => $produto->id_produto]) }}">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </a> --}}
+                        <form action="{{ route('usuario.destroy',['id'=>$user->id])}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class=" btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
                     </td>
                     <td>
                         {{ $user->id }}

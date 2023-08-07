@@ -1,6 +1,8 @@
 @extends('layouts.base')
 @section('content')
 
+@include('usuario.partials.menu')
+
 <h1> Usuário: {{ $user->nome }}</h1>
 <h2> Cargo: {{ $user->cargo}}</h2>
 

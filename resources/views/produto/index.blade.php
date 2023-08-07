@@ -33,7 +33,7 @@
                         <a class="btn btn-primary" href="{{ route('produto.edit', ['id' => $produto->id_produto]) }}">
                             <i class="bi bi-pencil-square"></i>
                         </a>
-                        <a class="btn btn-success" href="{{ route('produto.show', ['id' => $produto->id_produto]) }}">
+                        <a class="btn btn-warning" href="{{ route('produto.show', ['id' => $produto->id_produto]) }}">
                             <i class="bi bi-eye-fill"></i>
                         </a>
 

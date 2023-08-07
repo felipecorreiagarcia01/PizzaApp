@@ -33,7 +33,7 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-    
+
         $user = User::create($request->all());
         return redirect()
             ->route('usuario.show')
@@ -70,7 +70,10 @@ class UsuarioController extends Controller
 
         $user->update($request->all());
         return redirect()
-            ->route('usuario.show')
+        ->route(
+            'usuario.show',
+            ['id' => $user->id]
+        )
             ->with('success', 'Atualizado com Sucesso!');
     }
 
