@@ -4,7 +4,7 @@
 @include('usuario.partials.menu')
 
 <h1> Usuário: {{ $user->nome }}</h1>
-<h2> Cargo: {{ $user->cargo}}</h2>
+<h2> Cargo: {{ $user->id_cargo}}</h2>
 
 <table class="table table-striped">
     <thead>

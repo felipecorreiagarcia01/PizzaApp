@@ -40,7 +40,7 @@
                         <form action="{{ route('produto.destroy',['id'=>$produto->id_produto])}}" method="post">
                             @csrf
                             @method('delete')
-                            <button class=" btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class=" btn btn-danger" type="submit"><i class="fa-solid fa-trash-can"></i></button>
                             </form>
                     </td>
                     <td>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
+use Illuminate\Support\Facades\Hash;
 use App\Models\{
     User,
     Cargo
@@ -34,9 +35,17 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
 
-        $user = User::create($request->all());
+        $user = User::create([
+            'nome' => $request->nome,
+            'email' =>$request->email,
+            'id_cargo' =>$request->id_cargo,
+            'password' =>Hash::make('12345678')]
+           );
+
+
         return redirect()
-            ->route('usuario.show')
+            ->route('usuario.show',
+            ['id' => $user->id])
             ->with('success', 'Cadastrado com Sucesso!');
     }
 

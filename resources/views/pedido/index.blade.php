@@ -32,7 +32,7 @@
                 </a>
                 <form action="{{ route('pedido.destroy',['id_pedido'=>$pedido->id_pedido])}}" method="post">
                     @csrf
-                    <button class=" btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                    <button class=" btn btn-danger" type="submit"><i class="fa-solid fa-trash-can"></i></button>
                     </form>
             </td>
             <td>{{ $pedido->id_pedido }}</td>

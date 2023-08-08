@@ -41,7 +41,7 @@
 
                     <form action="{{ route('cliente.destroy',['id_cliente'=>$cargo->id_cargo])}}" method="post">
                         @csrf
-                        <button class=" btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class=" btn btn-danger" type="submit"><i class="fa-solid fa-trash-can"></i></button>
                     </form>
             </td>
             <td>{{ $cargo->id_cargo }}</td>

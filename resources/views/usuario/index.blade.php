@@ -38,8 +38,8 @@
                         </a>
                         <form action="{{ route('usuario.destroy',['id'=>$user->id])}}" method="post">
                             @csrf
-                            @method('delete')
-                            <button class=" btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            {{-- @method('delete') --}}
+                            <button class=" btn btn-danger" type="submit"><i class="fa-solid fa-trash-can"></i></button>
                             </form>
                     </td>
                     <td>

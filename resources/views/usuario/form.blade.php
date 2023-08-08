@@ -18,7 +18,7 @@
         id="produto-form" enctype="multipart/form-data" class="mt-6">
         @csrf
 
-        {{-- Dados do Produto --}}
+        {{-- Dados do Usuário --}}
         <div class="card-deck">
             <div class="card border-dark mt-1">
                 <div class="card-header">
