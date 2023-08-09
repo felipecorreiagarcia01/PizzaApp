@@ -14,6 +14,9 @@
 
 <p>{{ $clientes->onEachSide(5)->links() }}</p>
 
+{{-- Alerts --}}
+@include('layouts.partials.alerts')
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -36,6 +39,7 @@
                 </a>
                 <form action="{{ route('cliente.destroy',['id_cliente'=>$cliente->id_cliente])}}" method="post">
                     @csrf
+                    @method('delete')
                     <button class=" btn btn-danger" type="submit"><i class="fa-solid fa-trash-can"></i></button>
                     </form>
             </td>

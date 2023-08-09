@@ -114,7 +114,7 @@ class ProdutoController extends Controller
         Produto::find($id)->delete();
         return redirect()
             ->back()
-            ->with('danger', 'Removido com sucesso!');
+            ->with('danger','Removido com sucesso!');
     }
 
     /**

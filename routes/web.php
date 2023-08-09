@@ -65,7 +65,7 @@ Route::prefix('teste123')
 
             Route::post('/store','store')->name('cargo.store');
             Route::post('/update/{id_cargo}','update')->name('cargo.update');
-            Route::post('/destroy/{id}','destroy')->name('cargo.destroy');
+            Route::delete('/destroy/{id}','destroy')->name('cargo.destroy');
 
         });
 /**
@@ -88,7 +88,7 @@ Route::prefix('teste123')
 
             Route::post('/store','store')->name('cliente.store');
             Route::post('/update/{id_cliente}','update')->name('cliente.update');
-            Route::post('/destroy/{id_cliente}','destroy')->name('cliente.destroy');
+            Route::delete('/destroy/{id_cliente}','destroy')->name('cliente.destroy');
 
             Route::post('endereco/store/{id_cliente}','storeEndereco')->name('cliente.storeEndereco');
             Route::post('endereco/update/{id_cliente}/{id_endereco}','updateEndereco')->name('cliente.updateEndereco');
@@ -128,9 +128,17 @@ Route::prefix('teste123')
             Route::get('/{id}','show')->name('pedido.show');
             Route::get('/editar/{id}','edit')->name('pedido.edit');
 
+            Route::get('produto/novo/{id_pedido}','createProduto')->name('pedido.createProduto');
+            Route::get('produto/','indexProduto')->name('pedido.indexProduto');
+            Route::get('produto/editar/{id_produto_tamanho}','editProduto')->name('pedido.editProduto');
+
             Route::post('/store','store')->name('pedido.store');
             Route::post('/update/{id}','update')->name('pedido.update');
-            Route::post('/destroy/{id_pedido}','destroy')->name('pedido.destroy');
+            Route::delete('/destroy/{id}','destroy')->name('pedido.destroy');
+
+            Route::post('produto/store/{id_pedido}','storeProduto')->name('pedido.storeProduto');
+            Route::post('produto/update/{id_pedido}/{id_produto}','updateProduto')->name('pedido.updateProduto');
+            Route::post('Produto/destroy/{id_produto}','destroyProduto')->name('pedido.destroyProduto');
         });
 /*
  * |--------------------------------------------------------------------------

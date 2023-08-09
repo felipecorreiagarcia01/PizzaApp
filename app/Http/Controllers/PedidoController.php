@@ -12,7 +12,9 @@ use App\Models\{
     User,
     Pedido,
     Status,
-
+    PedidoProduto,
+    ProdutoTamanho,
+    Produto
 };
 
 
@@ -139,9 +141,75 @@ class PedidoController extends Controller
         Pedido::find($id)->delete();
         return redirect()
             ->back()
-            ->with('destroy','Excluído com sucesso!');
+            ->with('danger','Removido com sucesso!');
 
     }
+
+    /*
+    *|----------------------------------|*
+    *|         PEDIDOS PRODUTOS         |*
+    *|----------------------------------|*
+    */
+
+
+    public function createProduto(int $id_pedido)
+    {
+        $pedidoProduto = null;
+        $pedido = Pedido::find($id_pedido);
+        $users = User::class;
+        $tamanhos = Produto::class;
+
+        return view('pedido.formProduto')
+            ->with(compact('pedido','pedidoProduto','users','tamanhos'));
+    }
+
+    public function storeProduto(Request $request, int $id_pedido)
+    {
+
+        $pedidoProduto = PedidoProduto::create([
+            'id_pedido'   => $id_pedido,
+            'id_user'   => $request->id_user,
+            'id_produto_tamanho' =>$request->id_produto_tamanho,
+            'preco' => $request->preco,
+            'qtd' =>$request->qtd,
+            'subtotal' =>$request->subtotal,
+            'observacoes' =>$request->observacoes
+        ]);
+
+        return redirect()
+        ->route('pedido.show', ['id' => $id_pedido])
+        ->with('success', 'Produto Cadastrado com Sucesso!');
+    }
+
+    public function editProduto(int $id)
+    {
+        $pedidoProduto = PedidoProduto::find($id);
+        $pedido = $pedidoProduto->pedido();
+        $tamanhos = ProdutoTamanho::class;
+        $users = User::class;
+
+        return view('pedido.formProduto')
+            ->with(compact('pedido', 'produto', 'pedidoProduto','users'));
+    }
+
+    public function updateProduto(Request $request, int $id)
+    {
+        $pedidoProduto = ProdutoTamanho::find($id);
+        $pedidoProduto->update($request->all());
+        return redirect()
+        ->route('pedido.show',['id' => $pedidoProduto->id_pedido]);
+        -with('success', 'Atualizado com sucesso');
+
+    }
+
+    public function destroyProduto(int $id)
+    {
+        PedidoProduto::find($id)->delete();
+        return redirect()
+            ->back()
+            ->with('danger', 'Excluído com Sucesso!');
+    }
+
 
 }
 

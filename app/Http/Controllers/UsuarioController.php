@@ -77,7 +77,12 @@ class UsuarioController extends Controller
     {
         $user = User::find($id);
 
-        $user->update($request->all());
+        $user->update([
+            'nome' => $request->nome,
+            'email' =>$request->email,
+            'id_cargo' =>$request->id_cargo,
+            'password' =>Hash::make('12345678')]
+        );
         return redirect()
         ->route(
             'usuario.show',

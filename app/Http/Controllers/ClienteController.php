@@ -88,7 +88,7 @@ class ClienteController extends Controller
         Cliente::find($id)->delete();
         return redirect()
             ->back()
-            ->with('danger', 'Excluído com Sucesso!');
+            ->with('danger','Excluído com Sucesso!');
     }
 
 

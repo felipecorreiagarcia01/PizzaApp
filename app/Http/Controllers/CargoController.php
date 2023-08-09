@@ -21,8 +21,7 @@ class CargoController extends Controller
      */
     public function index()
     {
-        $cargos = Cargo::OrderBy('cargo')
-                        ->get();
+        $cargos = Cargo::OrderBy('cargo')->paginate(10);
         return view('cargo.index')
             ->with(compact('cargos'));
     }
@@ -88,7 +87,7 @@ class CargoController extends Controller
         $cargo = Cargo::find($id)->delete();
         return redirect()
             ->back()
-            ->with('destroy', 'Excluido com Sucesso!');
+            ->with('damger', 'Removido com Sucesso!');
     }
 
 }
